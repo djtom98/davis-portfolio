@@ -1,16 +1,16 @@
 import { experience, education } from "../data";
 import { Tag } from "../components/Tag";
 
-export const metadata = {
-  title: "Experience · Davis Jacob Thomas",
-};
+export const metadata = { title: "Experience · Davis Jacob Thomas" };
 
 export default function Experience() {
   return (
-    <div className="space-y-14">
+    <div className="space-y-12">
       <section>
-        <h1 className="text-2xl font-bold mb-2">Experience</h1>
-        <p className="text-sm" style={{ color: "var(--muted)" }}>
+        <h1 className="text-2xl md:text-4xl font-medium mb-1" style={{ color: "var(--text-primary)" }}>
+          Experience
+        </h1>
+        <p className="text-sm tracking-wider font-light" style={{ color: "var(--text-muted)" }}>
           Changelog from my journey
         </p>
       </section>
@@ -18,72 +18,65 @@ export default function Experience() {
       {/* Timeline */}
       <section className="space-y-10">
         {experience.map((role, i) => (
-          <div key={i} className="relative">
-            {/* Timeline line */}
-            {i < experience.length - 1 && (
+          <div key={i} className="flex gap-5">
+            {/* Dot + line */}
+            <div className="flex flex-col items-center pt-1.5">
               <div
-                className="absolute left-0 top-6 bottom-0 w-px -mb-10"
-                style={{ background: "var(--border)", marginLeft: "-1px" }}
+                className="w-2 h-2 rounded-full shrink-0"
+                style={{
+                  background: i === 0 ? "var(--text-primary)" : "var(--border)",
+                  border: `2px solid ${i === 0 ? "var(--text-primary)" : "var(--text-muted)"}`,
+                }}
               />
-            )}
-
-            <div className="flex gap-5">
-              {/* Dot */}
-              <div className="relative mt-1.5 shrink-0">
+              {i < experience.length - 1 && (
                 <div
-                  className="w-2 h-2 rounded-full border-2 z-10 relative"
-                  style={{
-                    borderColor: i === 0 ? "var(--foreground)" : "var(--muted)",
-                    background: i === 0 ? "var(--foreground)" : "var(--background)",
-                  }}
+                  className="w-px flex-1 mt-2"
+                  style={{ background: "var(--border)", minHeight: "2rem" }}
                 />
+              )}
+            </div>
+
+            <div className="flex-1 pb-4">
+              {/* Header */}
+              <div className="flex flex-col sm:flex-row sm:justify-between gap-1 mb-3">
+                <div>
+                  <p className="text-sm font-semibold" style={{ color: "var(--text-primary)" }}>
+                    {role.title}
+                  </p>
+                  <a
+                    href={role.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm font-light"
+                    style={{ color: "var(--text-muted)" }}
+                  >
+                    {role.company}
+                  </a>
+                </div>
+                <div className="shrink-0 text-xs sm:text-right" style={{ color: "var(--text-muted)" }}>
+                  <p>{role.duration}</p>
+                  <p>{role.location}</p>
+                </div>
               </div>
 
-              <div className="flex-1 pb-2">
-                {/* Header */}
-                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 mb-1">
-                  <div>
-                    <p className="text-sm font-semibold">{role.title}</p>
-                    <a
-                      href={role.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-sm"
-                      style={{ color: "var(--muted)" }}
-                    >
-                      {role.company}
-                    </a>
-                  </div>
-                  <div className="text-right shrink-0">
-                    <p className="text-xs" style={{ color: "var(--muted)" }}>
-                      {role.duration}
-                    </p>
-                    <p className="text-xs" style={{ color: "var(--muted)" }}>
-                      {role.location}
-                    </p>
-                  </div>
-                </div>
+              {/* Bullets */}
+              <ul className="space-y-2 mb-4">
+                {role.bullets.map((b, j) => (
+                  <li
+                    key={j}
+                    className="text-xs sm:text-sm flex gap-2 tracking-wide font-light leading-relaxed"
+                    style={{ color: "var(--text-secondary)" }}
+                  >
+                    <span className="shrink-0 mt-0.5">•</span>
+                    <span>{b}</span>
+                  </li>
+                ))}
+              </ul>
 
-                {/* Bullets */}
-                <ul className="mt-3 space-y-2">
-                  {role.bullets.map((b, j) => (
-                    <li
-                      key={j}
-                      className="text-xs flex gap-2"
-                      style={{ color: "var(--muted)" }}
-                    >
-                      <span className="shrink-0 mt-0.5">•</span>
-                      <span>{b}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                {/* Tags */}
-                <div className="flex flex-wrap gap-1.5 mt-4">
-                  {role.tags.map((t) => (
-                    <Tag key={t} label={t} />
-                  ))}
-                </div>
+              <div className="flex flex-wrap gap-1.5">
+                {role.tags.map((t) => (
+                  <Tag key={t} label={t} />
+                ))}
               </div>
             </div>
           </div>
@@ -91,36 +84,34 @@ export default function Experience() {
       </section>
 
       {/* Education */}
-      <section>
-        <h2
+      <section className="pt-4">
+        <p
           className="text-xs uppercase tracking-widest font-semibold mb-6"
-          style={{ color: "var(--muted)" }}
+          style={{ color: "var(--text-muted)" }}
         >
           Education
-        </h2>
+        </p>
         <div className="space-y-6">
           {education.map((ed, i) => (
             <div key={i}>
-              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 mb-2">
+              <div className="flex flex-col sm:flex-row sm:justify-between gap-1 mb-2">
                 <div>
-                  <p className="text-sm font-semibold">{ed.degree}</p>
+                  <p className="text-sm font-semibold" style={{ color: "var(--text-primary)" }}>
+                    {ed.degree}
+                  </p>
                   <a
                     href={ed.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm"
-                    style={{ color: "var(--muted)" }}
+                    className="text-sm font-light"
+                    style={{ color: "var(--text-muted)" }}
                   >
                     {ed.institution}
                   </a>
                 </div>
-                <div className="text-right shrink-0">
-                  <p className="text-xs" style={{ color: "var(--muted)" }}>
-                    {ed.duration}
-                  </p>
-                  <p className="text-xs" style={{ color: "var(--muted)" }}>
-                    {ed.grade}
-                  </p>
+                <div className="shrink-0 text-xs sm:text-right" style={{ color: "var(--text-muted)" }}>
+                  <p>{ed.duration}</p>
+                  <p>{ed.grade}</p>
                 </div>
               </div>
               {ed.topics.length > 0 && (

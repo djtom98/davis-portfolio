@@ -5,13 +5,24 @@ import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { profile } from "../data";
+import {
+  Home,
+  Briefcase,
+  FolderOpen,
+  User,
+  Mail,
+  Sun,
+  Moon,
+  Menu,
+  X,
+} from "lucide-react";
 
 const navLinks = [
-  { href: "/", label: "Home" },
-  { href: "/experience", label: "Experience" },
-  { href: "/projects", label: "Projects" },
-  { href: "/about", label: "About" },
-  { href: "/contact", label: "Contact" },
+  { href: "/", label: "Home", icon: Home },
+  { href: "/experience", label: "Experience", icon: Briefcase },
+  { href: "/projects", label: "Projects", icon: FolderOpen },
+  { href: "/about", label: "About", icon: User },
+  { href: "/contact", label: "Contact", icon: Mail },
 ];
 
 const socialLinks = [
@@ -24,166 +35,204 @@ const socialLinks = [
 function ThemeToggle() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
+  useEffect(() => setMounted(true), []);
   if (!mounted) return null;
-
   return (
     <button
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className="text-xs font-mono px-2 py-1 rounded border cursor-pointer transition-colors"
-      style={{
-        borderColor: "var(--border)",
-        color: "var(--muted)",
-      }}
+      className="p-1.5 rounded-md transition-colors cursor-pointer"
+      style={{ color: "var(--text-muted)" }}
       title="Toggle theme"
     >
-      {theme === "dark" ? "LT" : "DK"}
+      {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
     </button>
   );
 }
 
-export function Sidebar() {
+function NavItem({
+  href,
+  label,
+  icon: Icon,
+  active,
+}: {
+  href: string;
+  label: string;
+  icon: React.ElementType;
+  active: boolean;
+}) {
+  return (
+    <Link
+      href={href}
+      className="flex items-center gap-2 rounded-md text-sm border px-3 py-2 transition-colors"
+      style={
+        active
+          ? {
+              background: "var(--nav-active-bg)",
+              color: "var(--nav-active-text)",
+              borderColor: "var(--nav-active-bg)",
+            }
+          : {
+              background: "transparent",
+              color: "var(--text-primary)",
+              borderColor: "transparent",
+            }
+      }
+      onMouseEnter={(e) => {
+        if (!active) {
+          (e.currentTarget as HTMLElement).style.background = "var(--nav-hover-bg)";
+        }
+      }}
+      onMouseLeave={(e) => {
+        if (!active) {
+          (e.currentTarget as HTMLElement).style.background = "transparent";
+        }
+      }}
+    >
+      <Icon size={15} />
+      <span>{label}</span>
+    </Link>
+  );
+}
+
+function SidebarContent({ onClose }: { onClose?: () => void }) {
   const pathname = usePathname();
-  const [menuOpen, setMenuOpen] = useState(false);
+
+  return (
+    <div className="flex flex-col h-full px-4 py-10 space-y-4 overflow-y-auto">
+      {/* Avatar + name */}
+      <div className="flex items-center justify-between px-2 mb-4">
+        <Link
+          href="/"
+          className="flex items-center gap-3"
+          onClick={onClose}
+          style={{ textDecoration: "none" }}
+        >
+          <span
+            className="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full items-center justify-center text-sm font-semibold"
+            style={{
+              background: "var(--border)",
+              color: "var(--text-primary)",
+            }}
+          >
+            DJ
+          </span>
+          <div className="flex flex-col">
+            <span className="text-md" style={{ color: "var(--text-primary)" }}>
+              Davis
+            </span>
+            <span>
+              <span className="cursor-blink" style={{ color: "var(--text-muted)" }}>
+                |
+              </span>
+            </span>
+          </div>
+        </Link>
+        <div className="flex items-center gap-1">
+          <ThemeToggle />
+          {onClose && (
+            <button onClick={onClose} className="p-1.5 cursor-pointer" style={{ color: "var(--text-muted)" }}>
+              <X size={16} />
+            </button>
+          )}
+        </div>
+      </div>
+
+      {/* Nav */}
+      <div className="space-y-1">
+        {navLinks.map((link) => (
+          <NavItem
+            key={link.href}
+            href={link.href}
+            label={link.label}
+            icon={link.icon}
+            active={pathname === link.href}
+          />
+        ))}
+      </div>
+
+      {/* Connect */}
+      <div className="space-y-3 py-4">
+        <span className="text-sm block" style={{ color: "var(--text-primary)" }}>
+          Connect
+        </span>
+        <div className="space-y-2">
+          {socialLinks.map((s) => (
+            <a
+              key={s.label}
+              href={s.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block text-sm transition-colors"
+              style={{ color: "var(--text-muted)" }}
+              onMouseEnter={(e) =>
+                ((e.currentTarget as HTMLElement).style.color = "var(--text-primary)")
+              }
+              onMouseLeave={(e) =>
+                ((e.currentTarget as HTMLElement).style.color = "var(--text-muted)")
+              }
+            >
+              {s.label}
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function Sidebar() {
+  const [open, setOpen] = useState(false);
 
   return (
     <>
       {/* Mobile top bar */}
       <div
-        className="lg:hidden flex items-center justify-between px-6 py-4 border-b sticky top-0 z-50"
-        style={{ borderColor: "var(--border)", background: "var(--background)" }}
+        className="lg:hidden flex items-center justify-between px-5 py-4 sticky top-0 z-50 border-b"
+        style={{
+          background: "var(--sidebar-bg)",
+          borderColor: "var(--border)",
+        }}
       >
-        <Link href="/" className="font-mono text-lg font-semibold tracking-tight">
-          {profile.logo}
-          <span className="cursor-blink">|</span>
+        <Link href="/" className="flex items-center gap-2">
+          <span
+            className="flex h-8 w-8 items-center justify-center rounded-full text-xs font-semibold"
+            style={{ background: "var(--border)", color: "var(--text-primary)" }}
+          >
+            DJ
+          </span>
+          <span className="text-sm font-medium" style={{ color: "var(--text-primary)" }}>
+            Davis
+            <span className="cursor-blink" style={{ color: "var(--text-muted)" }}>|</span>
+          </span>
         </Link>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
           <ThemeToggle />
           <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="flex flex-col gap-1.5 cursor-pointer"
-            aria-label="Toggle menu"
+            onClick={() => setOpen(true)}
+            className="p-1.5 cursor-pointer"
+            style={{ color: "var(--text-primary)" }}
           >
-            <span
-              className="block w-5 h-px transition-transform"
-              style={{ background: "var(--foreground)" }}
-            />
-            <span
-              className="block w-5 h-px transition-transform"
-              style={{ background: "var(--foreground)" }}
-            />
-            <span
-              className="block w-3 h-px"
-              style={{ background: "var(--foreground)" }}
-            />
+            <Menu size={18} />
           </button>
         </div>
       </div>
 
-      {/* Mobile menu dropdown */}
-      {menuOpen && (
+      {/* Mobile overlay */}
+      {open && (
         <div
-          className="lg:hidden fixed inset-0 z-40 pt-16"
-          style={{ background: "var(--background)" }}
+          className="lg:hidden fixed inset-0 z-50"
+          style={{ background: "var(--sidebar-bg)" }}
         >
-          <nav className="flex flex-col px-6 py-8 gap-6">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setMenuOpen(false)}
-                className="text-2xl font-medium"
-                style={{
-                  color:
-                    pathname === link.href ? "var(--foreground)" : "var(--muted)",
-                }}
-              >
-                {link.label}
-              </Link>
-            ))}
-            <div
-              className="border-t pt-6 flex flex-col gap-3"
-              style={{ borderColor: "var(--border)" }}
-            >
-              {socialLinks.map((s) => (
-                <a
-                  key={s.label}
-                  href={s.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm"
-                  style={{ color: "var(--muted)" }}
-                >
-                  {s.label}
-                </a>
-              ))}
-            </div>
-          </nav>
+          <SidebarContent onClose={() => setOpen(false)} />
         </div>
       )}
 
       {/* Desktop sidebar */}
       <aside
-        className="hidden lg:flex flex-col fixed left-0 top-0 h-full w-64 px-8 py-10 border-r"
-        style={{ borderColor: "var(--border)", background: "var(--background)" }}
+        className="hidden lg:flex flex-col fixed left-0 top-0 h-screen w-60"
+        style={{ background: "var(--sidebar-bg)" }}
       >
-        {/* Logo */}
-        <div className="mb-10 flex items-center justify-between">
-          <Link
-            href="/"
-            className="font-mono text-xl font-semibold tracking-tight"
-          >
-            {profile.logo}
-            <span className="cursor-blink">|</span>
-          </Link>
-          <ThemeToggle />
-        </div>
-
-        {/* Nav */}
-        <nav className="flex flex-col gap-1 flex-1">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="py-1.5 text-sm transition-colors"
-              style={{
-                color:
-                  pathname === link.href ? "var(--foreground)" : "var(--muted)",
-                fontWeight: pathname === link.href ? "600" : "400",
-              }}
-            >
-              {link.label}
-            </Link>
-          ))}
-        </nav>
-
-        {/* Connect */}
-        <div className="mt-auto">
-          <p
-            className="text-xs font-semibold uppercase tracking-widest mb-3"
-            style={{ color: "var(--muted)" }}
-          >
-            Connect
-          </p>
-          <div className="flex flex-col gap-2">
-            {socialLinks.map((s) => (
-              <a
-                key={s.label}
-                href={s.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm transition-colors hover:opacity-100"
-                style={{ color: "var(--muted)" }}
-              >
-                {s.label}
-              </a>
-            ))}
-          </div>
-        </div>
+        <SidebarContent />
       </aside>
     </>
   );

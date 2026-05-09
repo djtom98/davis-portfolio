@@ -1,10 +1,9 @@
 "use client";
 
 import { useTypewriter, Cursor } from "react-simple-typewriter";
-import { profile, skills } from "../data";
+import { profile, skills, experience } from "../data";
 import { Tag } from "./Tag";
 import Link from "next/link";
-import { experience } from "../data";
 
 export function TypewriterHero() {
   const current = experience[0];
@@ -25,59 +24,76 @@ export function TypewriterHero() {
   });
 
   return (
-    <div className="space-y-12">
-      {/* Hero typewriter */}
-      <section>
-        <p
-          className="text-xs uppercase tracking-widest font-semibold mb-4"
-          style={{ color: "var(--muted)" }}
+    <div className="space-y-6 md:space-y-10">
+      {/* Hero heading */}
+      <div className="space-y-2">
+        <h1
+          className="text-2xl md:text-5xl font-medium"
+          style={{ color: "var(--text-primary)" }}
         >
-          Machine Learning Engineer · Barcelona
-        </p>
-
-        <h1 className="text-3xl font-bold mb-1">
           Hey, I&apos;m Davis
         </h1>
+        <h2
+          className="text-xl md:text-4xl font-medium"
+          style={{ color: "var(--text-muted)" }}
+        >
+          ML Engineer
+        </h2>
+      </div>
 
-        <div className="flex items-center min-h-[2.5rem] mt-2">
-          <span className="text-2xl font-semibold" style={{ color: "var(--muted)" }}>
-            {text}
-          </span>
-          <Cursor cursorStyle="|" cursorColor="var(--foreground)" />
-        </div>
-      </section>
+      {/* Typewriter */}
+      <div
+        className="text-lg md:text-2xl tracking-wider font-light"
+        style={{ color: "var(--text-primary)" }}
+      >
+        <span>{text}</span>
+        <Cursor cursorStyle="|" />
+      </div>
 
-      {/* Skill tags */}
-      <section>
-        <div className="flex flex-wrap gap-2">
-          {skills.map((s) => (
-            <Tag key={s} label={s} />
-          ))}
-        </div>
-      </section>
+      {/* Skill pills */}
+      <div className="flex flex-wrap gap-2">
+        {skills.map((s) => (
+          <Tag key={s} label={s} />
+        ))}
+      </div>
 
-      {/* Summary */}
-      <section>
-        <p className="text-sm leading-relaxed mb-4" style={{ color: "var(--muted)" }}>
-          {profile.summary}
+      {/* Body */}
+      <div
+        className="text-sm sm:text-base tracking-wider font-light space-y-3"
+        style={{ color: "var(--text-secondary)" }}
+      >
+        <p>
+          ML Engineer with 6 years of experience designing and operating production-grade
+          ML platforms, MLOps pipelines, and LLM/agentic systems.
         </p>
-        <p className="text-sm" style={{ color: "var(--muted)" }}>
-          Currently{" "}
+        <p>
+          Author and maintainer of multiple internal Python libraries spanning ML
+          utilities, GenAI, Knowledge Graphs, and data access —{" "}
+          open-source best practices throughout.
+        </p>
+        <div>
+          <span>Currently </span>
           <a
             href={current.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="underline"
-            style={{ color: "var(--foreground)" }}
+            className="link-pill underline"
+            style={{ color: "var(--text-primary)" }}
           >
-            {current.title} at {current.company}
+            ML Engineer at {current.company}
           </a>
-          . Based in {profile.location}.
-        </p>
-      </section>
+          <span>, based in {profile.location}.</span>
+        </div>
+        <div>
+          <span>You can talk to me about </span>
+          <span style={{ color: "var(--text-primary)", fontWeight: 500 }}>
+            ML systems, LLMs, agentic AI, or anything else.
+          </span>
+        </div>
+      </div>
 
-      {/* Quick links */}
-      <section className="grid grid-cols-2 gap-3">
+      {/* Quick nav cards */}
+      <div className="grid grid-cols-2 gap-3 pt-2">
         {[
           { href: "/experience", label: "Experience", sub: `${experience.length} roles` },
           { href: "/projects", label: "Projects", sub: "ML · AI · Data" },
@@ -87,63 +103,21 @@ export function TypewriterHero() {
           <Link
             key={item.href}
             href={item.href}
-            className="group p-4 rounded-lg border transition-colors"
-            style={{ borderColor: "var(--border)" }}
+            className="card-hover p-4 rounded-lg border"
+            style={{
+              background: "var(--card-bg)",
+              borderColor: "var(--card-border)",
+            }}
           >
-            <p className="text-sm font-semibold group-hover:underline">
+            <p className="text-sm font-semibold" style={{ color: "var(--text-primary)" }}>
               {item.label}
             </p>
-            <p className="text-xs mt-0.5" style={{ color: "var(--muted)" }}>
+            <p className="text-xs mt-0.5" style={{ color: "var(--text-muted)" }}>
               {item.sub}
             </p>
           </Link>
         ))}
-      </section>
-
-      {/* Current role card */}
-      <section>
-        <p
-          className="text-xs uppercase tracking-widest font-semibold mb-4"
-          style={{ color: "var(--muted)" }}
-        >
-          Currently
-        </p>
-        <div
-          className="border rounded-lg p-5"
-          style={{ borderColor: "var(--border)" }}
-        >
-          <div className="flex items-start justify-between gap-4 mb-3">
-            <div>
-              <p className="text-sm font-semibold">{current.title}</p>
-              <a
-                href={current.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm"
-                style={{ color: "var(--muted)" }}
-              >
-                {current.company}
-              </a>
-            </div>
-            <span className="text-xs shrink-0" style={{ color: "var(--muted)" }}>
-              {current.duration}
-            </span>
-          </div>
-          <ul className="space-y-1.5 mb-4">
-            {current.bullets.slice(0, 3).map((b, i) => (
-              <li key={i} className="text-xs flex gap-2" style={{ color: "var(--muted)" }}>
-                <span className="shrink-0 mt-0.5">•</span>
-                <span>{b}</span>
-              </li>
-            ))}
-          </ul>
-          <div className="flex flex-wrap gap-1.5">
-            {current.tags.map((t) => (
-              <Tag key={t} label={t} />
-            ))}
-          </div>
-        </div>
-      </section>
+      </div>
     </div>
   );
 }

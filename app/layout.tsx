@@ -5,30 +5,22 @@ import { Sidebar } from "./components/Sidebar";
 
 export const metadata: Metadata = {
   title: "Davis Jacob Thomas",
-  description:
-    "ML Engineer · AI Platform · LLMs · Agents · MLOps · Barcelona",
-  openGraph: {
-    title: "Davis Jacob Thomas",
-    description:
-      "ML Engineer with 6 years of experience building production-grade ML platforms, MLOps pipelines, and LLM/agentic systems.",
-    url: "https://djtom98.github.io",
-    type: "website",
-  },
+  description: "ML Engineer · AI Platform · LLMs · Agents · MLOps · Barcelona",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body>
+      <body style={{ background: "var(--bg)" }}>
         <Providers>
-          <div className="min-h-screen flex flex-col lg:flex-row">
+          <div
+            className="flex min-h-screen"
+            style={{ background: "var(--bg-gradient)" }}
+          >
             <Sidebar />
-            <main className="flex-1 lg:ml-64 min-h-screen">
-              <div className="max-w-2xl mx-auto px-6 py-12 lg:py-16">
+            {/* Main content — offset by sidebar width on desktop */}
+            <main className="flex-1 lg:pl-60 min-h-screen flex flex-col">
+              <div className="max-w-2xl w-full px-6 sm:px-10 py-10 sm:py-14">
                 {children}
               </div>
             </main>
