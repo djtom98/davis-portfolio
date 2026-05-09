@@ -171,6 +171,69 @@ export const techStack = {
   Languages: ["Python", "R", "SQL", "Bash"],
 };
 
+export const researchProjects = [
+  {
+    name: "Decoding Abnormal Returns: Graph-Enhanced Earnings Call Analysis",
+    description:
+      "NLP + Graph Neural Networks (GraphSAGE/GCN/GAT) on pharmaceutical earnings call transcripts. Event-study methodology to estimate cumulative abnormal returns in the 30-day post-call window.",
+    date: "2023-03",
+    github: "https://github.com/djtom98/Graph-Based-Analysis-Earnings-Calls",
+    report:
+      "https://drive.google.com/file/d/1p2GP0j-1PQ2aWcr8Evo2tU5g_aBFoFqR/view?usp=drive_link",
+    tags: ["NLP", "GNN", "GraphSAGE", "Python", "Jupyter"],
+  },
+  {
+    name: "Knowledge Distillation: Teacher–Student Architectural Choices",
+    description:
+      "Systematic study of how teacher model architecture and performance affects student model quality under knowledge distillation. Distilled models consistently outperform scratch-trained baselines.",
+    date: "2023-06",
+    github: "https://github.com/javi99/understanding_knowledge_distillation",
+    report:
+      "https://drive.google.com/file/d/1W_vd73yVq9MQn3fngWwFEVmdBdyKPiUa/view?usp=drive_link",
+    tags: ["PyTorch", "Knowledge Distillation", "Deep Learning", "Python"],
+  },
+  {
+    name: "Q-REPS: RL Algorithm for Continuous Action Spaces",
+    description:
+      "Study of Q-REPS, an RL algorithm addressing limitations of traditional Bellman error functions. Applied to the cart-pole benchmark and compared against A2C and PPO.",
+    date: "2023-07",
+    github: "https://github.com/djtom98/RL_qreps",
+    report:
+      "https://drive.google.com/file/d/171pgW1fqs15Fku3vEeM1k3qnx7wWIBKG/view?usp=drive_link",
+    tags: ["Reinforcement Learning", "Q-REPS", "A2C", "PPO", "Python"],
+  },
+  {
+    name: "SVD Decomposition of Story Arcs in Project Gutenberg Novels",
+    description:
+      "Singular Value Decomposition applied to story arcs scraped from Project Gutenberg. Identifies dominant narrative structures and explores correlation with publication events.",
+    date: "2023-03",
+    github: "https://github.com/djtom98/Project-Gutenberg",
+    report:
+      "https://drive.google.com/file/d/11OXOxuAbk9ry1vPyMcM3GKZDPjaqWXs6/view?usp=drive_link",
+    tags: ["SVD", "NLP", "Python", "Jupyter"],
+  },
+  {
+    name: "Optimal Bike Station Placement via Network Algorithms",
+    description:
+      "Applied two graph-based optimisation algorithms to the Sioux Falls network. Key finding: proximate station pairs reduce overall travel latency more effectively than dispersed placement.",
+    date: "2023-03",
+    github: "https://github.com/4Freye/bike-stations",
+    report:
+      "https://drive.google.com/file/d/19G-P8uzQKYgf9MuuuwVff15vKhtIn7w9/view?usp=drive_link",
+    tags: ["Network Algorithms", "Python", "Optimisation"],
+  },
+  {
+    name: "Preference Learning with the Mallows Rank Model",
+    description:
+      "Recommender algorithm using Bayesian Mallows model to aggregate partial rankings. Implemented with the BayesMallows R package in a probabilistic Bayesian framework.",
+    date: "2023-05",
+    github: "https://github.com/djtom98/Bayes-Mallows-Algorithm",
+    report:
+      "https://drive.google.com/file/d/1Pj7TfB4Gag-wVjoNkQMYuyb6yrLszndO/view?usp=drive_link",
+    tags: ["Bayesian Statistics", "Recommender Systems", "R"],
+  },
+];
+
 export const projects = [
   {
     name: "Knowledge Graph Platform",
