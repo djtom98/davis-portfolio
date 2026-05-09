@@ -85,32 +85,32 @@ export default function Projects() {
   return (
     <div className="space-y-14">
 
-      {/* ── Research projects ───────────────────────────────── */}
+      {/* ── Production / ML engineering projects ────────────── */}
       <section>
         <h1 className="text-2xl md:text-4xl font-medium mb-1" style={{ color: "var(--text)" }}>
-          Research
+          Projects
         </h1>
         <p className="text-sm tracking-wider font-light mb-8" style={{ color: "var(--muted)" }}>
+          Production systems and engineering work
+        </p>
+        <div className="space-y-4">
+          {projects.map((p, i) => (
+            <ProjectCard key={i} name={p.name} description={p.description} tags={p.tags} />
+          ))}
+        </div>
+      </section>
+
+      {/* ── Research projects ───────────────────────────────── */}
+      <section>
+        <h2 className="text-lg font-medium mb-1" style={{ color: "var(--text)" }}>
+          Research
+        </h2>
+        <p className="text-sm tracking-wider font-light mb-6" style={{ color: "var(--muted)" }}>
           Academic projects · BSE MSc Data Science 2022–23
         </p>
         <div className="space-y-4">
           {researchProjects.map((p, i) => (
             <ProjectCard key={i} {...p} />
-          ))}
-        </div>
-      </section>
-
-      {/* ── Production / ML engineering projects ────────────── */}
-      <section>
-        <h2 className="text-lg font-medium mb-1" style={{ color: "var(--text)" }}>
-          Engineering Projects
-        </h2>
-        <p className="text-sm tracking-wider font-light mb-6" style={{ color: "var(--muted)" }}>
-          Production systems built at AILY Labs
-        </p>
-        <div className="space-y-4">
-          {projects.map((p, i) => (
-            <ProjectCard key={i} name={p.name} description={p.description} tags={p.tags} />
           ))}
         </div>
       </section>

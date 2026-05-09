@@ -236,6 +236,12 @@ export const researchProjects = [
 
 export const projects = [
   {
+    name: "Aily Super Agent",
+    description:
+      "Production AI conversational backend powering Aily's chat, benchmarks, and integrations (Outlook, Zoom). FastAPI service with v1/v2/v3 routers, skill-gated agent execution, MCP aggregation layer, and full OpenTelemetry instrumentation. Implements a V3 planner/worker architecture (PydanticAI) alongside a V2 ReAct loop, with RabbitMQ-based streaming hooks and multi-tenant MCP server lifecycle management.",
+    tags: ["FastAPI", "PydanticAI", "MCP", "OpenTelemetry", "RabbitMQ", "Python", "Kubernetes"],
+  },
+  {
     name: "Knowledge Graph Platform",
     description:
       "Greenfield to production Neo4j platform: NLP-driven entity extraction, matching/merging pipelines, GraphRAG, LLM exploration agents, and Pydantic data models.",
