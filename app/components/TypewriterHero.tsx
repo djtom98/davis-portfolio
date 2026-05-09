@@ -10,7 +10,7 @@ export function TypewriterHero() {
 
   const [text] = useTypewriter({
     words: [
-      "machine_learning_engineer.py",
+      "senior_ml_engineer.py",
       "LLM systems builder",
       "AI platform architect",
       "knowledge_graph.neo4j",
@@ -37,7 +37,7 @@ export function TypewriterHero() {
           className="text-xl md:text-4xl font-medium"
           style={{ color: "var(--text-muted)" }}
         >
-          ML Engineer
+          Senior ML Engineer
         </h2>
       </div>
 
@@ -63,7 +63,7 @@ export function TypewriterHero() {
         style={{ color: "var(--text-secondary)" }}
       >
         <p>
-          ML Engineer with 6 years of experience designing and operating production-grade
+          Senior ML Engineer with 6 years of experience designing and operating production-grade
           ML platforms, MLOps pipelines, and LLM/agentic systems.
         </p>
         <p>
@@ -80,7 +80,7 @@ export function TypewriterHero() {
             className="link-pill underline"
             style={{ color: "var(--text-primary)" }}
           >
-            ML Engineer at {current.company}
+            Senior ML Engineer at {current.company}
           </a>
           <span>, based in {profile.location}.</span>
         </div>

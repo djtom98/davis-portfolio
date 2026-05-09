@@ -26,7 +26,7 @@ export default function About() {
             Who I Am
           </h2>
           <p>
-            Hey, I&apos;m Davis — an ML Engineer based in Barcelona. I spend most of my time
+            Hey, I&apos;m Davis — a Senior ML Engineer based in Barcelona. I spend most of my time
             designing and operating production-grade ML platforms, MLOps pipelines, and
             LLM/agentic systems.
           </p>
@@ -42,7 +42,7 @@ export default function About() {
             What I Do
           </h2>
           <p>
-            Currently an ML Engineer at{" "}
+            Currently a Senior ML Engineer at{" "}
             <a href="https://ailylabs.com" target="_blank" rel="noopener noreferrer" className={linkClass} style={{ color: "var(--text-primary)" }}>
               AILY Labs
             </a>

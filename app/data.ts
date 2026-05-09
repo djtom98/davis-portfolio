@@ -1,7 +1,7 @@
 export const profile = {
   name: "Davis Jacob Thomas",
   logo: "djtom",
-  title: "Machine Learning Engineer · AI Platform",
+  title: "Senior ML Engineer · AI Platform",
   tagline: "ML · LLMs · Agents · MLOps · Graph · Data",
   location: "Barcelona, Spain",
   email: "davisjacobthomas@gmail.com",
@@ -10,7 +10,7 @@ export const profile = {
   resume:
     "https://drive.google.com/file/d/1uZ5ATNMhKdqa7wib59RkC519kgq-6x5p/view?usp=drive_link",
   summary:
-    "ML Engineer with 6 years of experience designing, building and operating production-grade ML platforms, MLOps pipelines, and LLM/agentic systems. Author and maintainer of multiple internal Python libraries spanning ML utilities, GenAI, Knowledge Graphs, and data access. Passionate about leveraging AI for public good.",
+    "Senior ML Engineer with 6 years of experience designing, building and operating production-grade ML platforms, MLOps pipelines, and LLM/agentic systems. Author and maintainer of multiple internal Python libraries spanning ML utilities, GenAI, Knowledge Graphs, and data access. Passionate about leveraging AI for public good.",
 };
 
 export const skills = [
@@ -28,7 +28,7 @@ export const skills = [
 
 export const experience = [
   {
-    title: "Machine Learning Engineer · AI Platform",
+    title: "Senior ML Engineer · AI Platform",
     company: "AILY Labs",
     url: "https://ailylabs.com",
     duration: "May 2024 – Present",

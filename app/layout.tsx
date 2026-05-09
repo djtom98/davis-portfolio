@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata: Metadata = {
   title: "Davis Jacob Thomas",
-  description: "ML Engineer · AI Platform · LLMs · Agents · MLOps · Barcelona",
+  description: "Senior ML Engineer · AI Platform · LLMs · Agents · MLOps · Barcelona",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
