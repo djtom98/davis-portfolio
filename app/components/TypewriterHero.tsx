@@ -11,11 +11,12 @@ export function TypewriterHero() {
   const [text] = useTypewriter({
     words: [
       "Hey, the name's Davis.",
-      "☕  good coffee (before anything else)",
-      "🏂  snowboarding",
-      "🥾  hiking",
-      "🎾  padel",
-      "🍷  good wine",
+      "☕  Purveyor of cafes and good coffee.",
+      "🏂  I work to afford my skiing trips.",
+      "🥾  I think about hiking more than I actually do.",
+      "🎾  Getting a bit hooked on padel.",
+      "🍷  Always looking for a good glass of wine.",
+      "🍫  I'm a bit of a chocolate addict.",
     ],
     loop: true,
     delaySpeed: 2400,
@@ -25,8 +26,15 @@ export function TypewriterHero() {
 
   return (
     <div className="space-y-6 md:space-y-10">
-      {/* Single typewriter field */}
-      <h1 className="text-2xl md:text-5xl font-medium" style={{ color: "var(--text)" }}>
+      {/* Single typewriter field — fixed height to prevent layout shift */}
+      <h1
+        className="text-2xl md:text-5xl font-medium"
+        style={{
+          color: "var(--text)",
+          minHeight: "calc(2 * 2rem)",       /* 2 lines at text-2xl (mobile) */
+          lineHeight: "1.3",
+        }}
+      >
         {text}<Cursor cursorStyle="|" />
       </h1>
 

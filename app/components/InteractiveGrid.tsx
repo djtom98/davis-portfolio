@@ -7,6 +7,9 @@ export function InteractiveGrid() {
   const glowRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Skip on touch-only devices — mousemove never fires there
+    if (window.matchMedia("(hover: none)").matches) return;
+
     let raf: number;
 
     const onMove = (e: MouseEvent) => {
@@ -21,7 +24,7 @@ export function InteractiveGrid() {
       });
     };
 
-    window.addEventListener("mousemove", onMove);
+    window.addEventListener("mousemove", onMove, { passive: true });
     return () => {
       window.removeEventListener("mousemove", onMove);
       cancelAnimationFrame(raf);

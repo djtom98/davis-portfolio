@@ -53,6 +53,7 @@ export function Sidebar() {
         <Link href="/" className="flex items-center gap-3">
           <Image
             src="/avatar.jpg"
+              priority
             alt="Davis Jacob Thomas"
             width={40}
             height={40}
@@ -63,7 +64,10 @@ export function Sidebar() {
             <span className="text-sm font-medium" style={{ color: "var(--text)" }}>
               {profile.name}
             </span>
-            <span className="text-xs font-light" style={{ color: "var(--muted)" }}>
+            <span
+              className="text-xs font-light whitespace-nowrap overflow-hidden"
+              style={{ color: "var(--muted)", display: "block", height: "1rem", lineHeight: "1rem" }}
+            >
               {role}<Cursor cursorStyle="|" />
             </span>
           </div>
