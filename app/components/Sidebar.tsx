@@ -49,8 +49,8 @@ export function Sidebar() {
   return (
     <div className="flex flex-col h-full px-4 py-10">
       {/* Avatar + name */}
-      <div className="flex items-center justify-between px-2 mb-6">
-        <Link href="/" className="flex items-center gap-3">
+      <div className="flex items-center gap-2 px-2 mb-6">
+        <Link href="/" className="flex items-center gap-3 min-w-0 flex-1">
           <Image
             src="/avatar.jpg"
               priority
@@ -60,19 +60,19 @@ export function Sidebar() {
             className="rounded-full shrink-0 object-cover"
             style={{ width: 40, height: 40 }}
           />
-          <div className="flex flex-col leading-tight gap-0.5">
+          <div className="flex flex-col leading-tight gap-0.5 min-w-0">
             <span className="text-sm font-medium" style={{ color: "var(--text)" }}>
               {profile.name}
             </span>
             <span
-              className="text-xs font-light whitespace-nowrap overflow-hidden"
+              className="text-xs font-light whitespace-nowrap"
               style={{ color: "var(--muted)", display: "block", height: "1rem", lineHeight: "1rem" }}
             >
               {role}<Cursor cursorStyle="|" />
             </span>
           </div>
         </Link>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 shrink-0">
           <AccentCycler />
           <ThemeToggle />
         </div>

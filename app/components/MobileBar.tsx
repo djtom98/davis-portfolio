@@ -66,8 +66,8 @@ function SidebarDrawer({ onClose }: { onClose: () => void }) {
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-2 mb-6">
-          <Link href="/" onClick={onClose} className="flex items-center gap-3">
+        <div className="flex items-center gap-2 px-2 mb-6">
+          <Link href="/" onClick={onClose} className="flex items-center gap-3 min-w-0 flex-1">
             <Image
               src="/avatar.jpg"
               priority
@@ -77,20 +77,21 @@ function SidebarDrawer({ onClose }: { onClose: () => void }) {
               className="rounded-full object-cover shrink-0"
               style={{ width: 40, height: 40 }}
             />
-            <div className="flex flex-col leading-tight gap-0.5">
+            <div className="flex flex-col leading-tight gap-0.5 min-w-0">
               <span className="text-sm font-medium" style={{ color: "var(--text)" }}>
                 {profile.name}
               </span>
               <span
-                className="text-xs font-light whitespace-nowrap overflow-hidden"
+                className="text-xs font-light whitespace-nowrap"
                 style={{ color: "var(--muted)", display: "block", height: "1rem", lineHeight: "1rem" }}
               >
                 {role}<Cursor cursorStyle="|" />
               </span>
             </div>
           </Link>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 shrink-0">
             <AccentCycler />
+            <ThemeToggle />
             <button onClick={onClose} className="p-1.5" style={{ color: "var(--muted)" }}>
               <X size={18} />
             </button>
@@ -199,6 +200,7 @@ export function MobileBar() {
           </span>
         </Link>
         <div className="flex items-center gap-1">
+          <AccentCycler />
           <ThemeToggle />
           <button
             onClick={() => setOpen(true)}
