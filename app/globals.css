@@ -3,36 +3,104 @@
 /* ─── Design tokens ─────────────────────────────────────────── */
 :root {
   --sidebar: #f3f3f3;
+  --sidebar-glass: rgba(237, 233, 254, 0.42);
+  --sidebar-glass-border: rgba(99, 102, 241, 0.28);
+  --sidebar-glass-shadow: 0 8px 40px rgba(99,102,241,0.08), inset 0 1px 0 rgba(255,255,255,0.9), inset 1px 0 0 rgba(255,255,255,0.5);
   --bg: #ffffff;
-  --bg-end: #e5e7eb;
+  --bg-end: #f9fafb;
   --text: #161616;
   --muted: #6b7280;
   --subtle: #374151;
   --border: #e5e7eb;
   --card-border: #d1d5db;
-  --tag-bg: #e5e7eb;
-  --tag-fg: #374151;
   --nav-active-bg: #161616;
   --nav-active-fg: #ffffff;
   --nav-hover-bg: #e5e7eb;
-  --link-hover: #e5e7eb;
+  /* Indigo (default) */
+  --accent: #6366f1;
+  --accent-muted: #ede9fe;
+  --tag-bg: #ede9fe;
+  --tag-fg: #4f46e5;
+  --link-hover: #ede9fe;
+  --accent-glow: rgba(99, 102, 241, 0.18);
+  --card-shadow: rgba(99, 102, 241, 0.08);
 }
 
 .dark {
   --sidebar: #111111;
+  --sidebar-glass: rgba(30, 27, 75, 0.52);
+  --sidebar-glass-border: rgba(129, 140, 248, 0.22);
+  --sidebar-glass-shadow: 0 8px 40px rgba(0,0,0,0.50), inset 0 1px 0 rgba(129,140,248,0.10), inset 1px 0 0 rgba(129,140,248,0.06);
   --bg: #0a0a0a;
-  --bg-end: #111111;
+  --bg-end: #0f0f0f;
   --text: #f5f5f5;
   --muted: #9ca3af;
   --subtle: #d1d5db;
   --border: #1f2937;
   --card-border: #1f2937;
-  --tag-bg: #1f2937;
-  --tag-fg: #d1d5db;
   --nav-active-bg: #f5f5f5;
   --nav-active-fg: #0a0a0a;
   --nav-hover-bg: #1f2937;
-  --link-hover: #1f2937;
+  /* Indigo dark */
+  --accent: #818cf8;
+  --accent-muted: #1e1b4b;
+  --tag-bg: #1e1b4b;
+  --tag-fg: #a5b4fc;
+  --link-hover: #1e1b4b;
+  --accent-glow: rgba(129, 140, 248, 0.22);
+  --card-shadow: rgba(129, 140, 248, 0.08);
+}
+
+/* ─── Amber palette ──────────────────────────────────────────── */
+[data-accent="amber"] {
+  --accent: #f59e0b;
+  --accent-muted: #fef3c7;
+  --tag-bg: #fef3c7;
+  --tag-fg: #b45309;
+  --link-hover: #fef3c7;
+  --accent-glow: rgba(245, 158, 11, 0.18);
+  --card-shadow: rgba(245, 158, 11, 0.08);
+  --sidebar-glass: rgba(254, 243, 199, 0.42);
+  --sidebar-glass-border: rgba(245, 158, 11, 0.30);
+  --sidebar-glass-shadow: 0 8px 40px rgba(245,158,11,0.08), inset 0 1px 0 rgba(255,255,255,0.8), inset 1px 0 0 rgba(255,255,255,0.4);
+}
+.dark[data-accent="amber"] {
+  --accent: #fbbf24;
+  --accent-muted: #1c1407;
+  --tag-bg: #1c1407;
+  --tag-fg: #fbbf24;
+  --link-hover: #1c1407;
+  --accent-glow: rgba(251, 191, 36, 0.22);
+  --card-shadow: rgba(251, 191, 36, 0.08);
+  --sidebar-glass: rgba(28, 20, 7, 0.58);
+  --sidebar-glass-border: rgba(251, 191, 36, 0.18);
+  --sidebar-glass-shadow: 0 8px 40px rgba(0,0,0,0.50), inset 0 1px 0 rgba(251,191,36,0.08);
+}
+
+/* ─── Emerald palette ────────────────────────────────────────── */
+[data-accent="emerald"] {
+  --accent: #059669;
+  --accent-muted: #d1fae5;
+  --tag-bg: #d1fae5;
+  --tag-fg: #065f46;
+  --link-hover: #d1fae5;
+  --accent-glow: rgba(5, 150, 105, 0.18);
+  --card-shadow: rgba(5, 150, 105, 0.08);
+  --sidebar-glass: rgba(209, 250, 229, 0.40);
+  --sidebar-glass-border: rgba(5, 150, 105, 0.28);
+  --sidebar-glass-shadow: 0 8px 40px rgba(5,150,105,0.08), inset 0 1px 0 rgba(255,255,255,0.8), inset 1px 0 0 rgba(255,255,255,0.4);
+}
+.dark[data-accent="emerald"] {
+  --accent: #34d399;
+  --accent-muted: #022c22;
+  --tag-bg: #022c22;
+  --tag-fg: #34d399;
+  --link-hover: #022c22;
+  --accent-glow: rgba(52, 211, 153, 0.22);
+  --card-shadow: rgba(52, 211, 153, 0.08);
+  --sidebar-glass: rgba(2, 44, 34, 0.58);
+  --sidebar-glass-border: rgba(52, 211, 153, 0.18);
+  --sidebar-glass-shadow: 0 8px 40px rgba(0,0,0,0.50), inset 0 1px 0 rgba(52,211,153,0.08);
 }
 
 /* ─── Base reset ─────────────────────────────────────────────── */
@@ -40,7 +108,7 @@
 html, body { height: 100%; }
 
 body {
-  background: linear-gradient(to right, var(--bg), var(--bg-end));
+  background-color: var(--bg);
   color: var(--text);
   font-feature-settings: "kern" 1, "liga" 1;
   -webkit-font-smoothing: antialiased;
@@ -49,13 +117,69 @@ body {
 
 a { color: inherit; text-decoration: none; }
 
+/* ─── Interactive grid background ───────────────────────────── */
+.grid-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 40px 40px;
+  -webkit-mask-image: radial-gradient(
+    ellipse 480px 360px at var(--mx, -999px) var(--my, -999px),
+    black 0%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    ellipse 480px 360px at var(--mx, -999px) var(--my, -999px),
+    black 0%,
+    transparent 100%
+  );
+  opacity: 0.6;
+}
+.dark .grid-bg { opacity: 0.35; }
+
+.grid-glow {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(
+    550px circle at var(--mx, -999px) var(--my, -999px),
+    var(--accent-glow),
+    transparent 75%
+  );
+}
+
 /* ─── Cursor blink ───────────────────────────────────────────── */
 .cursor-blink { animation: blink 1s step-end infinite; }
 @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
-/* ─── Hover helpers (used in server components) ─────────────── */
-.card-hover { transition: border-color 0.15s ease; }
-.card-hover:hover { border-color: var(--text) !important; }
+/* ─── Green status pulse ─────────────────────────────────────── */
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background: #22c55e;
+  flex-shrink: 0;
+  animation: pulse-green 2s ease-in-out infinite;
+}
+@keyframes pulse-green {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.5); opacity: 1; }
+  50%       { box-shadow: 0 0 0 5px rgba(34, 197, 94, 0); opacity: 0.7; }
+}
+
+/* ─── Hover helpers ──────────────────────────────────────────── */
+.card-hover {
+  transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+.card-hover:hover {
+  border-color: var(--accent) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--card-shadow);
+}
 
 .link-pill {
   border-radius: 3px;
@@ -65,4 +189,10 @@ a { color: inherit; text-decoration: none; }
 .link-pill:hover { background: var(--link-hover); }
 
 .social-link { transition: color 0.12s ease; }
-.social-link:hover { color: var(--text) !important; }
+.social-link:hover { color: var(--accent) !important; }
+
+/* ─── Terminal card (sidebar) ────────────────────────────────── */
+.terminal-card {
+  font-family: ui-monospace, "Cascadia Code", "Fira Code", monospace;
+  border-left: 2px solid var(--accent);
+}

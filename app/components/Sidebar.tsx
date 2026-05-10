@@ -2,56 +2,80 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useTypewriter, Cursor } from "react-simple-typewriter";
+import Image from "next/image";
 import { profile } from "../data";
-import { Home, Briefcase, FolderOpen, User, Mail } from "lucide-react";
+import { Home, Briefcase, FolderOpen, User, Mail, NotebookPen } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
+import { AccentCycler } from "./AccentCycler";
 
 const navLinks = [
   { href: "/", label: "Home", icon: Home },
   { href: "/experience", label: "Experience", icon: Briefcase },
   { href: "/projects", label: "Projects", icon: FolderOpen },
   { href: "/about", label: "About", icon: User },
+  { href: "/blog", label: "Blog", icon: NotebookPen },
   { href: "/contact", label: "Contact", icon: Mail },
 ];
 
-const socialLinks = [
-  { label: "GitHub", href: profile.github },
-  { label: "LinkedIn", href: profile.linkedin },
-  { label: "Email", href: `mailto:${profile.email}` },
-  { label: "Resume", href: profile.resume },
-];
+function GitHubIcon({ size = 14 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 2C6.477 2 2 6.484 2 12.021c0 4.428 2.865 8.185 6.839 9.504.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.342-3.369-1.342-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.026 2.747-1.026.546 1.378.202 2.397.1 2.65.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.2 22 16.447 22 12.021 22 6.484 17.522 2 12 2z" />
+    </svg>
+  );
+}
+
+function LinkedInIcon({ size = 14 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+    </svg>
+  );
+}
 
 export function Sidebar() {
-  const pathname = usePathname();
+  const rawPathname = usePathname();
+  // Normalise trailing slash added by Next.js static export (trailingSlash: true)
+  const pathname = rawPathname.endsWith("/") && rawPathname !== "/" ? rawPathname.slice(0, -1) : rawPathname;
+  const [role] = useTypewriter({
+    words: ["ML Engineer", "Data Scientist", "AI Engineer", "Tech Enthusiast"],
+    loop: true,
+    delaySpeed: 2000,
+    typeSpeed: 55,
+    deleteSpeed: 30,
+  });
 
   return (
-    <div className="flex flex-col h-full px-4 py-10 space-y-6">
+    <div className="flex flex-col h-full px-4 py-10">
       {/* Avatar + name */}
-      <div className="flex items-center justify-between px-2">
+      <div className="flex items-center justify-between px-2 mb-6">
         <Link href="/" className="flex items-center gap-3">
-          <span
-            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-semibold"
-            style={{ background: "var(--border)", color: "var(--text)" }}
-          >
-            DJ
-          </span>
-          <div className="flex flex-col leading-tight">
-            <span className="text-base" style={{ color: "var(--text)" }}>
-              Davis
+          <Image
+            src="/avatar.jpg"
+            alt="Davis Jacob Thomas"
+            width={40}
+            height={40}
+            className="rounded-full shrink-0 object-cover"
+            style={{ width: 40, height: 40 }}
+          />
+          <div className="flex flex-col leading-tight gap-0.5">
+            <span className="text-sm font-medium" style={{ color: "var(--text)" }}>
+              {profile.name}
             </span>
-            <span
-              className="text-sm cursor-blink"
-              style={{ color: "var(--muted)" }}
-            >
-              |
+            <span className="text-xs font-light" style={{ color: "var(--muted)" }}>
+              {role}<Cursor cursorStyle="|" />
             </span>
           </div>
         </Link>
-        <ThemeToggle />
+        <div className="flex items-center gap-2">
+          <AccentCycler />
+          <ThemeToggle />
+        </div>
       </div>
 
       {/* Nav */}
-      <nav className="space-y-1">
+      <nav className="space-y-1 mb-6">
         {navLinks.map(({ href, label, icon: Icon }) => {
           const active = pathname === href;
           return (
@@ -65,22 +89,24 @@ export function Sidebar() {
                       background: "var(--nav-active-bg)",
                       color: "var(--nav-active-fg)",
                       borderColor: "var(--nav-active-bg)",
+                      borderLeftColor: "var(--accent)",
+                      borderLeftWidth: "3px",
                     }
                   : {
                       background: "transparent",
                       color: "var(--text)",
                       borderColor: "transparent",
+                      borderLeftWidth: "3px",
+                      borderLeftColor: "transparent",
                     }
               }
               onMouseEnter={(e) => {
                 if (!active)
-                  (e.currentTarget as HTMLElement).style.background =
-                    "var(--nav-hover-bg)";
+                  (e.currentTarget as HTMLElement).style.background = "var(--nav-hover-bg)";
               }}
               onMouseLeave={(e) => {
                 if (!active)
-                  (e.currentTarget as HTMLElement).style.background =
-                    "transparent";
+                  (e.currentTarget as HTMLElement).style.background = "transparent";
               }}
             >
               <Icon size={14} />
@@ -90,25 +116,79 @@ export function Sidebar() {
         })}
       </nav>
 
-      {/* Connect */}
-      <div className="space-y-3 pt-2">
-        <span className="text-sm" style={{ color: "var(--text)" }}>
-          Connect
-        </span>
-        <div className="space-y-2">
-          {socialLinks.map((s) => (
-            <a
-              key={s.label}
-              href={s.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="social-link block text-sm"
-              style={{ color: "var(--muted)" }}
-            >
-              {s.label}
-            </a>
-          ))}
+      {/* Currently exploring — terminal style */}
+      <div
+        className="terminal-card rounded-r-lg px-3 py-2.5 mb-6 space-y-1"
+        style={{ background: "var(--accent-muted)" }}
+      >
+        <p className="text-xs font-mono" style={{ color: "var(--accent)" }}>
+          $ exploring:
+        </p>
+        <a
+          href="https://github.com/djtom98/llm-d-experiments"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-xs font-mono leading-snug hover:underline block"
+          style={{ color: "var(--text)" }}
+        >
+          disaggregated inference / llm-d
+        </a>
+        <p className="text-xs font-mono" style={{ color: "var(--muted)" }}>
+          EPP plugins · P/D split
+        </p>
+      </div>
+
+      {/* Spacer */}
+      <div className="flex-1" />
+
+      {/* Status + social */}
+      <div className="px-2 space-y-3">
+        {/* Now */}
+        <div className="flex items-center gap-2">
+          <span className="status-dot" />
+          <span className="text-xs font-light" style={{ color: "var(--muted)" }}>
+            Barcelona · Open to chat
+          </span>
         </div>
+
+        {/* Social icons */}
+        <div className="flex items-center gap-3">
+          <a
+            href={profile.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="social-link"
+            style={{ color: "var(--muted)" }}
+            aria-label="GitHub"
+          >
+            <GitHubIcon size={15} />
+          </a>
+          <a
+            href={profile.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="social-link"
+            style={{ color: "var(--muted)" }}
+            aria-label="LinkedIn"
+          >
+            <LinkedInIcon size={15} />
+          </a>
+          <a
+            href={`mailto:${profile.email}`}
+            className="social-link"
+            style={{ color: "var(--muted)" }}
+            aria-label="Email"
+          >
+            <svg width={15} height={15} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <rect width="20" height="16" x="2" y="4" rx="2"/>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+            </svg>
+          </a>
+        </div>
+
+        <p className="text-xs" style={{ color: "var(--muted)", opacity: 0.5 }}>
+          Updated May 2026
+        </p>
       </div>
     </div>
   );

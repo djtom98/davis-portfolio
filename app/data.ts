@@ -8,7 +8,7 @@ export const profile = {
   linkedin: "https://linkedin.com/in/davis-jacob-thomas",
   github: "https://github.com/djtom98",
   resume:
-    "https://drive.google.com/file/d/1uZ5ATNMhKdqa7wib59RkC519kgq-6x5p/view?usp=drive_link",
+    "https://docs.google.com/document/d/1iQX8ARWaKovaTwSjV2-ls6hneFlnejCs/edit?usp=drive_link",
   summary:
     "Senior ML Engineer with 6 years of experience designing, building and operating production-grade ML platforms, MLOps pipelines, and LLM/agentic systems. Author and maintainer of multiple internal Python libraries spanning ML utilities, GenAI, Knowledge Graphs, and data access. Passionate about leveraging AI for public good.",
 };
@@ -41,6 +41,9 @@ export const experience = [
       "Maintain a shared GenAI library (embeddings, LLMs, vector DBs, Langfuse integration) and a unified data access layer enabling 10+ services to share a single tested data surface.",
       "Delivered production LLM and agentic systems: hybrid + vector RAG on OpenSearch, real-time ReAct agents via PydanticAI + MCP servers, a unified LLM gateway (OpenAI, Bedrock) with quota management.",
       "Productionalizing a LoRA model to be served on GPU Nodepools, culminating in a purpose-built autocomplete model served via a vLLM inference engine on Kubernetes.",
+      "Built an OpenSearch data platform end-to-end: Textract LAYOUT + Anthropic contextual retrieval, retrieval evals, cluster health and indexing pressure monitoring, cluster infra management with Terraform.",
+      "Designed and shipped an MCP server exposing OpenSearch to LLM agents via a PydanticAI query agent with a semantic index catalog, DSL validator, and inline Bedrock vector injection — agentic RAG with a safe, validated query surface.",
+      "Built a pull-based lakehouse query orchestrator (DuckDB/DuckLake over Redis + Kubernetes) for agentic services: pod family sizing, gradient-based proactive scaling, crash-safe inflight recovery, and a ~1s → ~50ms tail latency improvement.",
     ],
     tags: [
       "Kubernetes",
@@ -236,9 +239,9 @@ export const researchProjects = [
 
 export const projects = [
   {
-    name: "Aily Super Agent",
+    name: "Conversational AI Backend",
     description:
-      "Production AI conversational backend powering Aily's chat, benchmarks, and integrations (Outlook, Zoom). FastAPI service with v1/v2/v3 routers, skill-gated agent execution, MCP aggregation layer, and full OpenTelemetry instrumentation. Implements a V3 planner/worker architecture (PydanticAI) alongside a V2 ReAct loop, with RabbitMQ-based streaming hooks and multi-tenant MCP server lifecycle management.",
+      "Production backend for an AI assistant supporting chat, benchmarks, and third-party integrations. Skill-gated agent execution, MCP aggregation, and a planner/worker architecture alongside a ReAct loop — two agent strategies running from the same service. Streaming responses over RabbitMQ, multi-tenant MCP server lifecycle, and full distributed tracing throughout.",
     tags: ["FastAPI", "PydanticAI", "MCP", "OpenTelemetry", "RabbitMQ", "Python", "Kubernetes"],
   },
   {
@@ -258,6 +261,24 @@ export const projects = [
     description:
       "End-to-end fine-tuning pipeline: mining production chatbot interactions, LoRA fine-tuning, GGUF quantization, and artifact publishing to S3. Served via vLLM engine on Kubernetes.",
     tags: ["LoRA", "vLLM", "Kubernetes", "GGUF", "Hugging Face"],
+  },
+  {
+    name: "Lakehouse Query Orchestrator",
+    description:
+      "Orchestration layer that lets agentic services run DuckDB/DuckLake SQL queries without holding a local database session. Uses a pull-based Redis queue so runner pods fetch their own work — if a pod crashes mid-query, the job stays in the queue and gets picked up rather than lost. Queries are classified upfront into pod families (s/m/l/xl) so large and small jobs compete for separate pools. Proactive pod scaling watches queue depth trend rather than waiting for Kubernetes HPA to react. Tail latency dropped from ~1s to ~50ms after reworking how runners signal completion via Redis pub/sub.",
+    tags: ["FastAPI", "Redis", "Kubernetes", "DuckDB", "Python", "OpenTelemetry", "asyncio"],
+  },
+  {
+    name: "OpenSearch Data Platform",
+    description:
+      "End-to-end ownership of an OpenSearch cluster: ingestion, monitoring, and the shared connector library used across the stack. The ingestion pipeline uses Textract LAYOUT extraction for section-aware chunking, combined with Anthropic's contextual retrieval to embed section context alongside chunk text — improved retrieval evals by 7%. New indexes are built in full before the alias is swapped, so a re-index never serves incomplete results. The monitoring dashboard (FastAPI + React) surfaces backpressure, indexing throughput, and cluster health across multiple AWS accounts; write-rejection counters are cumulative, so the panel converts them to rate-of-change to show when the cluster is actually under pressure. Underpinning all of it: a Python connector library with a full index lifecycle, hybrid/vector/sparse search, and bulk DataFrame ingest used by 10+ services.",
+    tags: ["OpenSearch", "Bedrock", "Textract", "AWS CloudWatch", "FastAPI", "React", "Python", "RAG"],
+  },
+  {
+    name: "OpenSearch DSL Agent",
+    description:
+      "MCP server that lets LLMs query OpenSearch indexes through natural language without free-form cluster access. A PydanticAI agent plans and executes OpenSearch DSL against a semantic catalog of index schemas — it knows which fields exist, how hybrid RRF/normalization pipelines are wired, and what query shapes are valid before it writes a single query. Safety is layered: index allowlist, DSL shape validator that blocks scripts and clamps result sizes, and inline Bedrock vector injection for embedded fields. The LLM sees validation errors as strings and can self-correct; the cluster sees a narrow, validated query surface.",
+    tags: ["MCP", "PydanticAI", "OpenSearch", "RAG", "Python", "Bedrock"],
   },
   {
     name: "GenAI & Data Access Libraries",

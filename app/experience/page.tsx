@@ -7,10 +7,10 @@ export default function Experience() {
   return (
     <div className="space-y-12">
       <section>
-        <h1 className="text-2xl md:text-4xl font-medium mb-1" style={{ color: "var(--text-primary)" }}>
+        <h1 className="text-2xl md:text-4xl font-medium mb-1" style={{ color: "var(--text)" }}>
           Experience
         </h1>
-        <p className="text-sm tracking-wider font-light" style={{ color: "var(--text-muted)" }}>
+        <p className="text-sm tracking-wider font-light" style={{ color: "var(--muted)" }}>
           Changelog from my journey
         </p>
       </section>
@@ -24,8 +24,8 @@ export default function Experience() {
               <div
                 className="w-2 h-2 rounded-full shrink-0"
                 style={{
-                  background: i === 0 ? "var(--text-primary)" : "var(--border)",
-                  border: `2px solid ${i === 0 ? "var(--text-primary)" : "var(--text-muted)"}`,
+                  background: i === 0 ? "var(--text)" : "var(--border)",
+                  border: `2px solid ${i === 0 ? "var(--text)" : "var(--muted)"}`,
                 }}
               />
               {i < experience.length - 1 && (
@@ -40,7 +40,7 @@ export default function Experience() {
               {/* Header */}
               <div className="flex flex-col sm:flex-row sm:justify-between gap-1 mb-3">
                 <div>
-                  <p className="text-sm font-semibold" style={{ color: "var(--text-primary)" }}>
+                  <p className="text-sm font-semibold" style={{ color: "var(--text)" }}>
                     {role.title}
                   </p>
                   <a
@@ -48,12 +48,12 @@ export default function Experience() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-sm font-light"
-                    style={{ color: "var(--text-muted)" }}
+                    style={{ color: "var(--muted)" }}
                   >
                     {role.company}
                   </a>
                 </div>
-                <div className="shrink-0 text-xs sm:text-right" style={{ color: "var(--text-muted)" }}>
+                <div className="shrink-0 text-xs sm:text-right" style={{ color: "var(--muted)" }}>
                   <p>{role.duration}</p>
                   <p>{role.location}</p>
                 </div>
@@ -65,7 +65,7 @@ export default function Experience() {
                   <li
                     key={j}
                     className="text-xs sm:text-sm flex gap-2 tracking-wide font-light leading-relaxed"
-                    style={{ color: "var(--text-secondary)" }}
+                    style={{ color: "var(--subtle)" }}
                   >
                     <span className="shrink-0 mt-0.5">•</span>
                     <span>{b}</span>
@@ -87,7 +87,7 @@ export default function Experience() {
       <section className="pt-4">
         <p
           className="text-xs uppercase tracking-widest font-semibold mb-6"
-          style={{ color: "var(--text-muted)" }}
+          style={{ color: "var(--muted)" }}
         >
           Education
         </p>
@@ -96,7 +96,7 @@ export default function Experience() {
             <div key={i}>
               <div className="flex flex-col sm:flex-row sm:justify-between gap-1 mb-2">
                 <div>
-                  <p className="text-sm font-semibold" style={{ color: "var(--text-primary)" }}>
+                  <p className="text-sm font-semibold" style={{ color: "var(--text)" }}>
                     {ed.degree}
                   </p>
                   <a
@@ -104,12 +104,12 @@ export default function Experience() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-sm font-light"
-                    style={{ color: "var(--text-muted)" }}
+                    style={{ color: "var(--muted)" }}
                   >
                     {ed.institution}
                   </a>
                 </div>
-                <div className="shrink-0 text-xs sm:text-right" style={{ color: "var(--text-muted)" }}>
+                <div className="shrink-0 text-xs sm:text-right" style={{ color: "var(--muted)" }}>
                   <p>{ed.duration}</p>
                   <p>{ed.grade}</p>
                 </div>
