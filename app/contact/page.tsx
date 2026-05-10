@@ -1,7 +1,8 @@
-import { profile } from "../data";
-import { Mail, FileText } from "lucide-react";
+"use client";
 
-export const metadata = { title: "Contact · Davis Jacob Thomas" };
+import { useState } from "react";
+import { profile } from "../data";
+import { Mail, FileText, Check } from "lucide-react";
 
 function GitHubIcon({ size = 17 }: { size?: number }) {
   return (
@@ -19,7 +20,7 @@ function LinkedInIcon({ size = 17 }: { size?: number }) {
   );
 }
 
-const links = [
+const externalLinks = [
   {
     label: "LinkedIn",
     href: profile.linkedin,
@@ -33,12 +34,6 @@ const links = [
     icon: GitHubIcon,
   },
   {
-    label: "Email",
-    href: `mailto:${profile.email}`,
-    sub: profile.email,
-    icon: Mail,
-  },
-  {
     label: "Resume",
     href: profile.resume,
     sub: "Google Doc · always up to date",
@@ -46,7 +41,31 @@ const links = [
   },
 ];
 
+const cardStyle = {
+  background: "var(--card-bg)",
+  borderColor: "var(--card-border)",
+};
+
+const iconStyle = {
+  background: "var(--tag-bg)",
+  color: "var(--text)",
+};
+
 export default function Contact() {
+  const [copied, setCopied] = useState(false);
+
+  const copyEmail = () => {
+    // On touch devices mailto: is the right UX; on desktop copy to clipboard
+    if (window.matchMedia("(hover: none)").matches) {
+      window.location.href = `mailto:${profile.email}`;
+      return;
+    }
+    navigator.clipboard.writeText(profile.email).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  };
+
   return (
     <div className="space-y-10">
       <section>
@@ -68,35 +87,46 @@ export default function Contact() {
         </p>
 
         <div className="space-y-3">
-          {links.map(({ label, href, sub, icon: Icon }) => (
+          {/* External links */}
+          {externalLinks.map(({ label, href, sub, icon: Icon }) => (
             <a
               key={label}
               href={href}
               target="_blank"
               rel="noopener noreferrer"
               className="card-hover flex items-center gap-4 p-4 rounded-xl border"
-              style={{
-                background: "var(--card-bg)",
-                borderColor: "var(--card-border)",
-              }}
+              style={cardStyle}
             >
-              <span
-                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg"
-                style={{ background: "var(--tag-bg)", color: "var(--text)" }}
-              >
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg" style={iconStyle}>
                 <Icon size={17} />
               </span>
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-semibold" style={{ color: "var(--text)" }}>
-                  {label}
-                </p>
-                <p className="text-xs mt-0.5 font-light truncate" style={{ color: "var(--muted)" }}>
-                  {sub}
-                </p>
+                <p className="text-sm font-semibold" style={{ color: "var(--text)" }}>{label}</p>
+                <p className="text-xs mt-0.5 font-light truncate" style={{ color: "var(--muted)" }}>{sub}</p>
               </div>
               <span className="text-lg shrink-0" style={{ color: "var(--muted)" }}>→</span>
             </a>
           ))}
+
+          {/* Email — copies to clipboard instead of opening mail app */}
+          <button
+            onClick={copyEmail}
+            className="card-hover w-full flex items-center gap-4 p-4 rounded-xl border text-left"
+            style={cardStyle}
+          >
+            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg" style={iconStyle}>
+              {copied ? <Check size={17} /> : <Mail size={17} />}
+            </span>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-semibold" style={{ color: "var(--text)" }}>Email</p>
+              <p className="text-xs mt-0.5 font-light truncate" style={{ color: "var(--muted)" }}>
+                {copied ? "Copied to clipboard!" : profile.email}
+              </p>
+            </div>
+            <span className="text-lg shrink-0" style={{ color: "var(--muted)" }}>
+              {copied ? "✓" : "→"}
+            </span>
+          </button>
         </div>
       </section>
     </div>
