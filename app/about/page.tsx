@@ -88,7 +88,7 @@ export default function About() {
           style={{ background: "var(--card-bg)", borderColor: "var(--card-border)" }}
         >
           <p className="text-sm font-semibold" style={{ color: "var(--text)" }}>
-            Résumé ↗
+            Resume ↗
           </p>
           <p className="text-xs mt-0.5" style={{ color: "var(--muted)" }}>
             Google Docs
