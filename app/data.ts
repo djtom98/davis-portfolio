@@ -1,7 +1,7 @@
 export const profile = {
   name: "Davis Jacob Thomas",
   logo: "djtom",
-  title: "Senior ML Engineer · AI Platform",
+  title: "ML Engineer · AI Platform",
   tagline: "ML · LLMs · Agents · MLOps · Graph · Data",
   location: "Barcelona, Spain",
   email: "davisjacobthomas@gmail.com",
@@ -10,7 +10,7 @@ export const profile = {
   resume:
     "https://docs.google.com/document/d/1iQX8ARWaKovaTwSjV2-ls6hneFlnejCs/edit?usp=drive_link",
   summary:
-    "Senior ML Engineer with 6 years of experience designing, building and operating production-grade ML platforms, MLOps pipelines, and LLM/agentic systems. Author and maintainer of multiple internal Python libraries spanning ML utilities, GenAI, Knowledge Graphs, and data access. Passionate about leveraging AI for public good.",
+    "ML Engineer with 6 years of experience designing, building and operating production-grade ML platforms, MLOps pipelines, and LLM/agentic systems. Author and maintainer of multiple internal Python libraries spanning ML utilities, GenAI, Knowledge Graphs, and data access. Passionate about leveraging AI for public good.",
 };
 
 export const skills = [
@@ -28,22 +28,23 @@ export const skills = [
 
 export const experience = [
   {
-    title: "Senior ML Engineer · AI Platform",
+    title: "ML Engineer · AI Platform",
     company: "AILY Labs",
     url: "https://ailylabs.com",
     duration: "May 2024 – Present",
     location: "Barcelona, Spain",
     bullets: [
       "Maintain and improve the org's shared ML/AI platform on Kubernetes (EKS), eliminating per-team infrastructure duplication and cutting model deployment lead time with shared GHA CI/CD workflows.",
-      "Engineered a standardised FastAPI model-serving framework adopted org-wide — factory pattern, request/response middleware, health checks, Datadog APM tracing, and multi-tenant MLflow model loading.",
+      "Engineered a standardised FastAPI model-serving framework adopted org-wide: factory pattern, request/response middleware, health checks, Datadog APM tracing, and multi-tenant MLflow model loading.",
       "Authored and maintain an internal scikit-learn-compatible ML utilities library covering MRMR/SHAP feature selection, Optuna hyperparameter tuning, statistical drift detection, and MLflow lifecycle management.",
       "Designed a Knowledge Graph platform from greenfield to production on Neo4j: NLP-driven entity extraction, matching and merging pipelines, GraphRAG, LLM exploration agents, Pydantic data models.",
       "Maintain a shared GenAI library (embeddings, LLMs, vector DBs, Langfuse integration) and a unified data access layer enabling 10+ services to share a single tested data surface.",
       "Delivered production LLM and agentic systems: hybrid + vector RAG on OpenSearch, real-time ReAct agents via PydanticAI + MCP servers, a unified LLM gateway (OpenAI, Bedrock) with quota management.",
       "Productionalizing a LoRA model to be served on GPU Nodepools, culminating in a purpose-built autocomplete model served via a vLLM inference engine on Kubernetes.",
       "Built an OpenSearch data platform end-to-end: Textract LAYOUT + Anthropic contextual retrieval, retrieval evals, cluster health and indexing pressure monitoring, cluster infra management with Terraform.",
-      "Designed and shipped an MCP server exposing OpenSearch to LLM agents via a PydanticAI query agent with a semantic index catalog, DSL validator, and inline Bedrock vector injection — agentic RAG with a safe, validated query surface.",
-      "Built a pull-based lakehouse query orchestrator (DuckDB/DuckLake over Redis + Kubernetes) for agentic services: pod family sizing, gradient-based proactive scaling, crash-safe inflight recovery, and a ~1s → ~50ms tail latency improvement.",
+      "Designed and shipped an MCP server exposing OpenSearch to LLM agents via a PydanticAI query agent with a semantic index catalog, DSL validator, and inline Bedrock vector injection. Agentic RAG with a safe, validated query surface.",
+      "Contributed to a pull-based lakehouse query orchestrator (DuckDB/DuckLake over Redis + Kubernetes) for agentic services: pod family sizing, gradient-based proactive scaling, crash-safe inflight recovery, and a ~1s → ~50ms tail latency improvement.",
+      "Contributed to a shared semantic layer (metadata and context layer) providing agents and services a unified catalog API over tables, indexes, and skills, with tenant-aware metadata resolution and a dbt/YAML publish pipeline into Postgres.",
     ],
     tags: [
       "Kubernetes",
@@ -239,80 +240,86 @@ export const researchProjects = [
 
 export const projects = [
   {
-    name: "Conversational AI Backend",
-    description:
-      "Production backend for an AI assistant supporting chat, benchmarks, and third-party integrations. Skill-gated agent execution, MCP aggregation, and a planner/worker architecture alongside a ReAct loop — two agent strategies running from the same service. Streaming responses over RabbitMQ, multi-tenant MCP server lifecycle, and full distributed tracing throughout.",
-    tags: ["FastAPI", "PydanticAI", "MCP", "OpenTelemetry", "RabbitMQ", "Python", "Kubernetes"],
-  },
-  {
-    name: "Knowledge Graph Platform",
-    description:
-      "Greenfield to production Neo4j platform: NLP-driven entity extraction, matching/merging pipelines, GraphRAG, LLM exploration agents, and Pydantic data models.",
-    tags: ["Neo4j", "NLP", "LLMs", "GraphRAG", "Python"],
-  },
-  {
-    name: "ML Utilities Library",
-    description:
-      "Internal scikit-learn-compatible library covering MRMR/SHAP feature selection, Optuna hyperparameter tuning, statistical drift detection, and MLflow lifecycle management. 80%+ test coverage.",
-    tags: ["Python", "MLflow", "SHAP", "Optuna", "scikit-learn"],
-  },
-  {
-    name: "LLM Fine-tuning Pipeline",
-    description:
-      "End-to-end fine-tuning pipeline: mining production chatbot interactions, LoRA fine-tuning, GGUF quantization, and artifact publishing to S3. Served via vLLM engine on Kubernetes.",
-    tags: ["LoRA", "vLLM", "Kubernetes", "GGUF", "Hugging Face"],
-  },
-  {
-    name: "Lakehouse Query Orchestrator",
-    description:
-      "Orchestration layer that lets agentic services run DuckDB/DuckLake SQL queries without holding a local database session. Uses a pull-based Redis queue so runner pods fetch their own work — if a pod crashes mid-query, the job stays in the queue and gets picked up rather than lost. Queries are classified upfront into pod families (s/m/l/xl) so large and small jobs compete for separate pools. Proactive pod scaling watches queue depth trend rather than waiting for Kubernetes HPA to react. Tail latency dropped from ~1s to ~50ms after reworking how runners signal completion via Redis pub/sub.",
-    tags: ["FastAPI", "Redis", "Kubernetes", "DuckDB", "Python", "OpenTelemetry", "asyncio"],
-  },
-  {
     name: "OpenSearch Data Platform",
     description:
-      "End-to-end ownership of an OpenSearch cluster: ingestion, monitoring, and the shared connector library used across the stack. The ingestion pipeline uses Textract LAYOUT extraction for section-aware chunking, combined with Anthropic's contextual retrieval to embed section context alongside chunk text — improved retrieval evals by 7%. New indexes are built in full before the alias is swapped, so a re-index never serves incomplete results. The monitoring dashboard (FastAPI + React) surfaces backpressure, indexing throughput, and cluster health across multiple AWS accounts; write-rejection counters are cumulative, so the panel converts them to rate-of-change to show when the cluster is actually under pressure. Underpinning all of it: a Python connector library with a full index lifecycle, hybrid/vector/sparse search, and bulk DataFrame ingest used by 10+ services.",
+      "Full ownership of an OpenSearch cluster from day one: ingestion pipeline, monitoring dashboard, and the shared connector library used across the stack. Ingestion uses Textract LAYOUT for section-aware chunking paired with Anthropic contextual retrieval to embed section relevance alongside chunk text, improving retrieval evals by 7%. Indexes are built in full behind a staging alias before cutover, so re-indexing never serves a partial result. The monitoring dashboard tracks indexing throughput, backpressure, and cluster health across multiple AWS accounts; write-rejection counters are converted to rate-of-change so the panel shows when the cluster is actually under pressure rather than displaying cumulative noise. The connector library wraps the full index lifecycle, hybrid/vector/sparse search, and bulk DataFrame ingest and is used by 10+ services.",
     tags: ["OpenSearch", "Bedrock", "Textract", "AWS CloudWatch", "FastAPI", "React", "Python", "RAG"],
   },
   {
     name: "OpenSearch DSL Agent",
     description:
-      "MCP server that lets LLMs query OpenSearch indexes through natural language without free-form cluster access. A PydanticAI agent plans and executes OpenSearch DSL against a semantic catalog of index schemas — it knows which fields exist, how hybrid RRF/normalization pipelines are wired, and what query shapes are valid before it writes a single query. Safety is layered: index allowlist, DSL shape validator that blocks scripts and clamps result sizes, and inline Bedrock vector injection for embedded fields. The LLM sees validation errors as strings and can self-correct; the cluster sees a narrow, validated query surface.",
+      "MCP server for safe, natural-language querying of OpenSearch without giving LLMs free-form cluster access. A PydanticAI agent consults a semantic catalog of index schemas before writing any query: it knows which fields exist, how hybrid RRF/normalization pipelines are wired, and which query shapes are valid. Safety is enforced in layers: index allowlist, a DSL shape validator that blocks scripts and clamps result sizes, and inline Bedrock vector injection for embedded fields. Validation errors are surfaced as strings so the model can self-correct; from the cluster's perspective it sees a narrow, pre-validated query surface.",
     tags: ["MCP", "PydanticAI", "OpenSearch", "RAG", "Python", "Bedrock"],
-  },
-  {
-    name: "GenAI & Data Access Libraries",
-    description:
-      "Shared GenAI library (embeddings, LLMs, vector DBs, Langfuse) and unified data access layer (PostgreSQL, S3, Azure Blob, OpenSearch, DuckDB) enabling 10+ services.",
-    tags: ["LangChain", "OpenSearch", "Langfuse", "Python", "PostgreSQL"],
   },
   {
     name: "FastAPI Model-Serving Framework",
     description:
-      "Standardised serving framework adopted org-wide — factory pattern, middleware, health checks, Datadog APM tracing, and multi-tenant MLflow model loading with Locust load tests.",
+      "Org-wide serving framework built to eliminate the pattern of every team writing their own FastAPI boilerplate. Factory-pattern app construction, shared request/response middleware, standardised health checks, Datadog APM tracing, and multi-tenant MLflow model loading. Load-tested with Locust before rollout; adopted across all model-serving workloads on the platform.",
     tags: ["FastAPI", "MLflow", "Datadog", "Python", "Kubernetes"],
+  },
+  {
+    name: "Knowledge Graph Platform",
+    description:
+      "Built a Neo4j knowledge graph platform from scratch: NLP-driven entity extraction, entity matching and merging pipelines, GraphRAG retrieval, LLM exploration agents, and Pydantic data models for the graph schema. The platform became the structured memory layer powering several downstream AI products.",
+    tags: ["Neo4j", "NLP", "LLMs", "GraphRAG", "Python"],
+  },
+  {
+    name: "Semantic Layer",
+    description:
+      "The business map agents use instead of raw data. Context, domain knowledge, and data semantics are opaque to agents unless they are explicitly structured and made accessible; this is the infrastructure that does that. Table descriptions, index schemas, agent skills, and tenant-specific business rules are authored in dbt and YAML, published and versioned into Postgres, and served through a single Python API surface. Agents query it to understand what data exists, what it means in business terms, and which query patterns are valid before they touch anything. Tenant-aware resolution composes base resources with per-tenant overlays so each context gets a tailored view. Contributed to core catalog surfaces and agent context integration.",
+    tags: ["Python", "PostgreSQL", "dbt", "RAG", "Agents", "Multi-tenant"],
+  },
+  {
+    name: "Lakehouse Query Orchestrator",
+    description:
+      "Orchestration layer for running DuckDB/DuckLake SQL from agentic services without each service holding a local database session. Work is submitted to a pull-based Redis queue; runner pods fetch jobs themselves, so a pod crash mid-query leaves the job in the queue rather than losing it. Jobs are classified upfront into pod families (s/m/l/xl) so large and small queries compete in separate pools. Scaling watches queue depth gradient rather than waiting for Kubernetes HPA lag. Tail latency dropped from ~1s to ~50ms after reworking completion signalling to use Redis pub/sub instead of polling.",
+    tags: ["FastAPI", "Redis", "Kubernetes", "DuckDB", "Python", "OpenTelemetry", "asyncio"],
+  },
+  {
+    name: "Conversational AI Backend",
+    description:
+      "Production backend for an AI assistant with chat, benchmarks, and third-party integrations. Two agent execution strategies in the same service: skill-gated MCP aggregation with a planner/worker split, and a ReAct loop for open-ended tasks. Responses stream over RabbitMQ, MCP server lifecycle is multi-tenant, and every agent execution is traced end-to-end with OpenTelemetry.",
+    tags: ["FastAPI", "PydanticAI", "MCP", "OpenTelemetry", "RabbitMQ", "Python", "Kubernetes"],
+  },
+  {
+    name: "LLM Fine-tuning Pipeline",
+    description:
+      "End-to-end pipeline for fine-tuning on production chatbot interactions: data mining, LoRA training, GGUF quantisation, and artifact publishing to S3. The resulting model is served via vLLM on Kubernetes GPU nodepools as a purpose-built autocomplete model.",
+    tags: ["LoRA", "vLLM", "Kubernetes", "GGUF", "Hugging Face"],
+  },
+  {
+    name: "ML Utilities Library",
+    description:
+      "scikit-learn-compatible internal library covering MRMR/SHAP feature selection, Optuna hyperparameter tuning, statistical drift detection, and MLflow lifecycle management. Written to be the shared toolbox teams reach for first rather than reimplementing the same experiments. 80%+ test coverage.",
+    tags: ["Python", "MLflow", "SHAP", "Optuna", "scikit-learn"],
+  },
+  {
+    name: "GenAI & Data Access Libraries",
+    description:
+      "Two shared libraries that sit under most of the platform's services: a GenAI layer (embeddings, LLM clients, vector DB abstractions, Langfuse tracing) and a unified data access layer over PostgreSQL, S3, Azure Blob, OpenSearch, and DuckDB. Ten-plus services share a single tested surface instead of each rolling their own connection handling.",
+    tags: ["LangChain", "OpenSearch", "Langfuse", "Python", "PostgreSQL"],
   },
   {
     name: "GraphSAGE for Financial NLP",
     description:
-      "Novel inductive GraphSAGE variant to learn embeddings from Knowledge Graphs extracted from earnings-call transcripts, estimating cumulative abnormal returns in the 30-day post-event window.",
+      "Research project: a novel inductive GraphSAGE variant that learns embeddings from Knowledge Graphs extracted from earnings-call transcripts, used to estimate cumulative abnormal returns in the 30-day post-event window.",
     tags: ["GraphSAGE", "GNN", "NLP", "PyTorch", "Knowledge Graphs"],
   },
 ];
 
 export const achievements = [
   {
-    title: "TEDxMACE 2021 — Licensee & Organiser",
+    title: "TEDxMACE 2021 · Licensee & Organiser",
     description:
       "Led a 35-person team to deliver a national TEDx conference with speakers across India.",
   },
   {
-    title: "SAE Six Sigma Convention — National Winner",
+    title: "SAE Six Sigma Convention · National Winner",
     description:
       "Applied DMAIC methodology to a complex case study at the Society of Automotive Engineers national convention.",
   },
   {
-    title: "SAE Autonomous Vehicle Challenge — National Winner",
+    title: "SAE Autonomous Vehicle Challenge · National Winner",
     description:
       "Developed ADAS-based vehicle/pedestrian detection system in MATLAB.",
   },

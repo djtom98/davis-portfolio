@@ -18,7 +18,7 @@ export default function Blog() {
       >
         <p>
           Notes on ML systems, things I&apos;m building, and ideas I keep coming back to.
-          Published when they&apos;re ready — not on a schedule.
+          Published when they&apos;re ready, not on a schedule.
         </p>
         <p style={{ color: "var(--muted)" }}>
           Nothing here yet. Check back soon.

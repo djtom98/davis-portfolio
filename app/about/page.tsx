@@ -13,7 +13,7 @@ export default function About() {
           About
         </h1>
         <p className="text-sm tracking-wider font-light" style={{ color: "var(--muted)" }}>
-          Senior ML Engineer · Barcelona
+          ML Engineer · Barcelona
         </p>
       </section>
 
@@ -28,13 +28,13 @@ export default function About() {
             <a href="https://ailylabs.com" target="_blank" rel="noopener noreferrer" className={linkClass} style={{ color: "var(--text)" }}>
               AILY Labs
             </a>
-            {" "}I own the shared ML/AI platform — the layer that sits between raw models
+            {" "}I own the shared ML/AI platform, the layer that sits between raw models
             and the product teams building on top of them. That means model serving frameworks,
             Knowledge Graph infrastructure, LLM pipelines, and the shared libraries that
             let teams move fast without reinventing the wheel every sprint.
           </p>
           <p>
-            Lately I&apos;m most absorbed by agentic systems — specifically the gap between
+            Lately I&apos;m most absorbed by agentic systems, specifically the gap between
             a demo that looks impressive and a system you&apos;d actually trust to take actions
             in production. Getting that right is still an open problem and I find it genuinely
             interesting.
